@@ -49,9 +49,9 @@ class AuthCheck {
             $api_token = $this->getRestManager()->getApiTokenEntity()::where([
                 ['access_token', '=', $token],
                 ['active', '=', 1]
-            ])->get();
-            if ($api_token->count()>0){
-                $api_token = $api_token[0];
+            ])->first();
+
+            if (!empty($api_token)){
                 $last_update = strtotime($api_token->updated_at);
                 $next_update = $last_update + $api_token->expires_in;
                 if ($next_update > time()){
