@@ -29,7 +29,7 @@ class Router extends \Core\Module\Router {
     public array $mapForUriBuilder = [
         'swagger' => [
             'callback' => 'swagger',
-            'pattern' =>'/v{version:[0-9]+}',
+            'pattern' =>'/v{version:int}',
             'method' => ['GET']
         ],
     ];

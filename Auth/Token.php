@@ -8,7 +8,7 @@
 namespace Modules\Rest\Auth;
 
 use Modules\Rest\Exceptions\Error\Token as TokenError;
-use Slim\Http\ServerRequest as Request;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Token {
 

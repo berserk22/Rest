@@ -11,8 +11,8 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Modules\Rest\Manager\AbstractManager;
 use Modules\Rest\RestTrait;
-use Slim\Http\Response;
-use Slim\Http\ServerRequest as Request;
+use Slim\Psr7\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class IndexController extends AbstractManager {
 
@@ -72,7 +72,7 @@ class IndexController extends AbstractManager {
             $data['client_secret'] = $this->getHash();
 
             if ($user->password !== $data['password'] || $user->client_secret !== $data['client_secret']){
-                return $response->withJson([
+                return $this->getView()->renderJson($response, [
                     'success'=>false,
                     'error'=>'Password or Client Secret is Invalid'
                 ], 401);
@@ -99,7 +99,7 @@ class IndexController extends AbstractManager {
             }
             $token->save();
 
-            return $response->withJson([
+            return $this->getView()->renderJson($response,[
                 'access_token'=>$token->access_token,
                 'expires_in'=>$token->expires_in,
                 'refresh_token'=>$token->refresh_token,
@@ -108,7 +108,7 @@ class IndexController extends AbstractManager {
             ], 200);
         }
         else {
-            return $response->withJson([
+            return $this->getView()->renderJson($response,[
                 'success'=>false,
                 'error'=>'Unknown Username or Client ID',
             ], 401);
@@ -138,7 +138,7 @@ class IndexController extends AbstractManager {
                     $api_token->expires_in=(int)$this->getConfig("api")['expiresIn'];
                     $api_token->save();
 
-                    return $response->withJson([
+                    return $this->getView()->renderJson($response,[
                         'access_token'=>$api_token->access_token,
                         'expires_in'=>$api_token->expires_in,
                         'refresh_token'=>$api_token->refresh_token,
@@ -166,7 +166,7 @@ class IndexController extends AbstractManager {
                 'error'=>'Token is required',
             ];
         }
-        return $response->withJson($data, 401);
+        return $this->getView()->renderJson($response,$data, 401);
     }
 
     /**

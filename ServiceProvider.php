@@ -43,30 +43,21 @@ class ServiceProvider extends Provider {
     public function init(): void {
         $container = $this->getContainer();
         if (!$container->has('Rest\Manager')) {
-            $container->set('Rest\Manager', function (){
-                $manager = new RestManager($this);
-                $manager->initEntity();
-                return $manager;
-            });
+            $manager = new RestManager($this);
+            $container->set('Rest\Manager', $manager->initEntity());
         }
 
         if (!$container->has('Rest\Model')){
-            $container->set('Rest\Model', function () {
-                return new RestModel($this);
-            });
+            $container->set('Rest\Model', new RestModel($this));
         }
 
 
         if (!$container->has($this->route)){
-            $container->set($this->route, function(){
-                return new Router($this);
-            });
+            $container->set($this->route, new Router($this));
         }
 
         if (!$container->has($this->routeApi)){
-            $container->set($this->routeApi, function(){
-                return new ApiRouter($this);
-            });
+            $container->set($this->routeApi, new ApiRouter($this));
         }
     }
 
@@ -87,13 +78,9 @@ class ServiceProvider extends Provider {
      */
     public function boot(): void {
         $container = $this->getContainer();
-        $container->set('Modules\Rest\Controller\IndexController', function(){
-            return new Controller\IndexController($this);
-        });
+        $container->set('Modules\Rest\Controller\IndexController', new Controller\IndexController($this));
 
-        $container->set('Modules\Rest\ApiController\IndexController', function(){
-            return new ApiController\IndexController($this);
-        });
+        $container->set('Modules\Rest\ApiController\IndexController', new ApiController\IndexController($this));
     }
 
     /**

@@ -9,7 +9,7 @@ namespace Modules\Rest\Manager;
 
 use Core\Module\Controller;
 use ReflectionException;
-use Slim\Http\Response;
+use Slim\Psr7\Response;
 
 abstract class AbstractManager extends Controller {
 

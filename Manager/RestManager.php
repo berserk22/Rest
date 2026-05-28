@@ -22,15 +22,11 @@ class RestManager {
      */
     public function initEntity(): static {
         if (!$this->getContainer()->has('Rest\ApiUser')){
-            $this->getContainer()->set('Rest\ApiUser', function () {
-                return "Modules\Rest\Db\Models\ApiUser";
-            });
+            $this->getContainer()->set('Rest\ApiUser', "Modules\Rest\Db\Models\ApiUser");
         }
 
         if (!$this->getContainer()->has('Rest\ApiToken')){
-            $this->getContainer()->set('Rest\ApiToken', function ($c) {
-                return "Modules\Rest\Db\Models\ApiToken";
-            });
+            $this->getContainer()->set('Rest\ApiToken', "Modules\Rest\Db\Models\ApiToken");
         }
 
         return $this;

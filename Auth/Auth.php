@@ -11,7 +11,7 @@ use Core\Exception;
 use Modules\Rest\Exceptions\Error\Token as TokenError;
 use Modules\Rest\RestTrait;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Http\ServerRequest as Request;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Interfaces\RouteInterface;
 use UnexpectedValueException;
 

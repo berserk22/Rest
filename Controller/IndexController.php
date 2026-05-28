@@ -15,8 +15,8 @@ use Modules\Router\Methods;
 use OpenApi\Analysers\TokenAnalyser;
 use OpenApi\Annotations\OpenApi;
 use OpenApi\Generator;
-use Slim\Http\Response;
-use Slim\Http\ServerRequest as Request;
+use Slim\Psr7\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class IndexController extends Controller {
 
